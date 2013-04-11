@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+
+  <head>
+    {% block head %}
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Slate is a responsive theme for GitHub Pages" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ SITEURL }}/theme/css/stylesheet.css">
+    <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+
+    {% if FEED_ALL_ATOM %}
+    <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+    {% endif %}
+    {% if FEED_ALL_RSS %}
+    <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+    {% endif %}
+    {% if FEED_ATOM %}
+    <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+    {% endif %}
+    {% if FEED_RSS %}
+    <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+    {% endif %}
+    {% if CATEGORY_FEED_ATOM %}
+    <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_ATOM|format(category) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" />
+    {% endif %}
+    {% if CATEGORY_FEED_RSS %}
+    <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_RSS|format(category) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+    {% endif %}
+    {% if TAG_FEED_ATOM %}
+    <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_ATOM|format(tag) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" />
+    {% endif %}
+    {% if TAG_FEED_RSS %}
+    <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(tag) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" />
+    {% endif %}
+
+    {% endblock head %}
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          {% if GITHUB_URL %}
+          <a id="forkme_banner" href="{{GITHUB_URL}}">View on GitHub</a>
+          {% endif %}
+
+          <h1 id="project_title">{{ SITENAME }}</h1>
+          <h2 id="project_tagline">{{ SITESUBTITLE }}</h2>
+
+          <section id="downloads">
+            {% if ZIP_DOWNLOAD_LINK %}
+            <a class="zip_download_link" href="{{ZIP_DOWNLOAD_LINK}}">Download this project as a .zip file</a>
+            {% endif %}
+            {% if TAR_DOWNLOAD_LINK %}
+            <a class="tar_download_link" href="{{TAR_DOWNLOAD_LINK}}">Download this project as a tar.gz file</a>
+            {% endif %}
+          </section>
+        </header>
+    </div>
+
+    <nav id="menu"><ul>
+    {% for title, link in MENUITEMS %}
+        <li><a href="{{ link }}">{{ title }}</a></li>
+    {% endfor %}
+    {% if DISPLAY_PAGES_ON_MENU %}
+      {% for p in PAGES %}
+        <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+      {% endfor %}
+    {% else %}
+      {% for cat, null in categories %}
+        <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+      {% endfor %}
+    {% endif %}
+    </ul></nav><!-- /#menu -->
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        {% block content %}
+        {% endblock %}
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Site maintained by {{AUTHOR}}</p>
+	<p>Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+           which takes great advantage of <a href="http://python.org">Python</a>.</p>
+      </footer>
+    </div>
+
+  </body>
+</html>
